@@ -3,6 +3,7 @@ import { login } from "../../../store/authSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 
 import { loginValidation } from "../../../lib/authValidation";
 
@@ -12,6 +13,7 @@ const initialValues = {
 };
 
 const FormLogin = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -40,6 +42,7 @@ const FormLogin = () => {
 
         dispatch(login(data.token));
         setErrorMessage("");
+        navigate("/");
       } catch (error) {
         console.error("Login error:", error.message);
         setErrorMessage("Login failed. Please check your credentials.");
