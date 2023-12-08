@@ -1,4 +1,4 @@
-import { useRoutes } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import ProtectedRoute from "./routes/ProtectedRoute";
 
 import LoginPage from "./pages/login";
@@ -7,6 +7,8 @@ import RegisterPage from "./pages/register";
 
 import "./App.css";
 import DataPage from "./pages/data";
+
+const token = localStorage.getItem("token");
 
 const routes = [
   {
@@ -25,7 +27,7 @@ const routes = [
       </ProtectedRoute>
     ),
   },
-  { path: "/login", element: <LoginPage /> },
+  { path: "/login", element: token ? <Navigate to="/" /> : <LoginPage /> },
   { path: "/register", element: <RegisterPage /> },
 ];
 
